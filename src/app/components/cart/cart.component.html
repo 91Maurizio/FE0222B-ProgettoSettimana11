@@ -1,0 +1,16 @@
+<div *ngIf="arrayCart.length == 0" class="text-center mt-4">
+  <p class="h2">Non hai acquistato nessun prodotto, ritorna allo</p>
+  <button class="btn btn-success fs-4 text-center mb-5 mt-4" [routerLink]="['/shop']">Shop</button>
+</div>
+<div class="container d-flex flex-row justify-content-xl-start justyfy-content-center flex-wrap">
+  <div class="card m-3" style="width: 20rem; height: 15rem" *ngFor="let prod of arrayCart">
+    <header class="card-header">
+      <h4 class="card-tittle text-center">{{prod.name}}</h4>
+    </header>
+    <div class="card-body">
+      <p class="card-text text-center">{{prod.description}}</p>
+    </div>
+    <div class="card-footer d-flex justify-content-end">{{prod.price}}</div>
+  </div>
+</div>
+<div></div>
