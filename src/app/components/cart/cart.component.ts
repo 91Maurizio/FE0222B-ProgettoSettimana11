@@ -15,43 +15,30 @@ export class CartComponent implements OnInit {
   sub!: Subscription;
   tot: number = 0;
   form!: FormGroup;
-  loading: boolean  = false;
+  loading: Boolean  = false;
   prods!: products[];
 
-  constructor(private prodService: ProductsService, private cartService: CartService, private form: FormBuilder) { }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  constructor(private prodService: ProductsService, private cartService: CartService, private fb: FormBuilder) { }
 
   addToCart(obj: products) {
     this.prodService.addToSrvArray(obj);
   }
   totalPrice() {
     for(let prod of this.arrayCart) {
-      this.tot += prod.prices;
+      this.tot = this.tot + prod.price;
     }
     return this.tot;
+  }
 
 
   ngOnInit(): void {
     this.arrayCart = this.prodService.getArrayCart();
-    this.form = this.form.group({
+    this.form = this.fb.group({
       name: [],
       email: [],
       address: []
     });
     this.tot = 0;
     this.tot = this.totalPrice();
-}
-    this.loading = true;
-    this.sub = this.cartService.get().subscribe((arrayProd) => {
-      this.prods = arrayProd;
-      this.loading = false;
-    })
   }
-
-  addNum() {
-    this.prodService.countCart();
-  }
-
 }
